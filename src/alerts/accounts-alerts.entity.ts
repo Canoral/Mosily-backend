@@ -1,6 +1,10 @@
-// accounts-alerts.entity.ts
-
-import { Entity, PrimaryGeneratedColumn, Column, ManyToOne } from 'typeorm';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  ManyToOne,
+  JoinColumn,
+} from 'typeorm';
 import { Alerts } from './alerts.entity';
 
 @Entity()
@@ -12,6 +16,7 @@ export class AccountsAlerts {
   id_account: number;
 
   @ManyToOne(() => Alerts, (alerts) => alerts.accountsAlerts)
+  @JoinColumn({ name: 'id_alert' })
   alert: Alerts;
 
   @Column()

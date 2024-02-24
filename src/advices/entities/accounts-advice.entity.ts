@@ -17,7 +17,7 @@ export class AccountsAdvices {
   @Column()
   id_account: number;
 
-  @ManyToOne(() => Advices, (advice) => advice.accountsAdvice)
+  @ManyToOne(() => Advices)
   @JoinColumn({ name: 'id_advice' }) // Spécifie le nom de la colonne de clé étrangère
   advice: Advices;
 

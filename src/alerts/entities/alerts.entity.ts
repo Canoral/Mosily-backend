@@ -10,11 +10,11 @@ export class Alerts {
   language: string;
 
   @Column()
-  alert_formula: string;
+  formula: string;
 
   @Column()
-  alert_text: string;
+  text: string;
 
-  @OneToMany(() => AccountsAlerts, (accountsAlerts) => accountsAlerts.alert)
-  accountsAlerts: AccountsAlerts[];
+  @OneToMany(() => AccountsAlerts, (accounts) => accounts.alert)
+  accounts: AccountsAlerts[];
 }

@@ -1,8 +1,8 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
-import { Alerts } from './alerts.entity';
-import { AccountsAlerts } from './accounts-alerts.entity';
+import { Alerts } from './entities/alerts.entity';
+import { AccountsAlerts } from './entities/accounts-alerts.entity';
 
 @Injectable()
 export class AlertsService {
@@ -15,11 +15,21 @@ export class AlertsService {
 
   async getAllAlerts(): Promise<Alerts[]> {
     const results = await this.alertsRepository.find({
-      relations: ['accountsAlerts'], // Ajout des relations
+      relations: ['accounts'],
     });
     if (!results) {
       throw new NotFoundException('Une erreur est survenue');
     }
     return results;
+  }
+
+  async updateAlert(id: number): Promise<void> {
+    const result = await this.accountAlertsRepository.manager.query(
+      "UPDATE accounts_alerts SET status = 'Old' WHERE id_alert = $1",
+      [id],
+    );
+    if (!result) {
+      throw new NotFoundException('Une erreur est survenue');
+    }
   }
 }

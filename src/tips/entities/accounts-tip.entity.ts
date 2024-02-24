@@ -5,20 +5,20 @@ import {
   ManyToOne,
   JoinColumn,
 } from 'typeorm';
-import { Alerts } from './alerts.entity';
+import { Tips } from './tip.entity';
 
 @Entity()
-export class AccountsAlerts {
+export class AccountsTips {
   @PrimaryGeneratedColumn()
   id: number;
 
   @Column()
   id_account: number;
 
-  @ManyToOne(() => Alerts, (alerts) => alerts.accountsAlerts)
-  @JoinColumn({ name: 'id_alert' })
-  alert: Alerts;
+  @ManyToOne(() => Tips)
+  @JoinColumn({ name: 'id_tip' })
+  tip: Tips;
 
-  @Column()
+  @Column({ length: 10 })
   status: string;
 }

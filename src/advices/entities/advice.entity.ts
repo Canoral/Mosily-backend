@@ -11,10 +11,10 @@ export class Advices {
   language: string;
 
   @Column()
-  advice_formula: string;
+  formula: string;
   @Column()
-  advice_text: string;
+  text: string;
 
-  @OneToMany(() => AccountsAdvices, (accountsAdvice) => accountsAdvice.advice)
-  accountsAdvice: AccountsAdvices[];
+  @OneToMany(() => AccountsAdvices, (accounts) => accounts.advice)
+  accounts: AccountsAdvices[];
 }
